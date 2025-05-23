@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-medium leading-tight;
+  }
+  
+  h1 {
+    @apply text-3xl mb-6;
+  }
+  
+  h2 {
+    @apply text-2xl mb-4;
+  }
+  
+  h3 {
+    @apply text-xl mb-3;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
+  
+  .form-input {
+    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm 
+           focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+  
+  .tournament-status-active {
+    @apply text-green-700 bg-green-100 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .tournament-status-pending {
+    @apply text-yellow-700 bg-yellow-100 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .tournament-status-completed {
+    @apply text-blue-700 bg-blue-100 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .tournament-status-cancelled {
+    @apply text-red-700 bg-red-100 px-2 py-1 rounded-full text-xs font-medium;
+  }
+}
+
+.bracket-container {
+  @apply flex overflow-x-auto pb-8;
+}
+
+.bracket-round {
+  @apply flex flex-col justify-around min-w-64 px-4;
+}
+
+.bracket-match {
+  @apply bg-white border border-gray-200 rounded-md p-4 mb-4 shadow-sm 
+         hover:shadow-md transition-shadow cursor-pointer;
+}
+
+.bracket-match-active {
+  @apply border-blue-500 ring-2 ring-blue-200;
+}
+
+/* Плавная анимация для переходов между страницами */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+
+.match-wrapper {
+  position: relative;
+  /* Отступ между карточками; при необходимости подкорректируйте */
+  margin-bottom: 2rem;
+}
+
+.match-wrapper .connector {
+  position: absolute;
+  top: 50%;
+  right: -24px;      /* сдвиг вправо на длину линии */
+  width: 24px;       /* длина горизонтальной линии */
+  height: 1px;       /* толщина */
+  background-color: #e5e7eb; /* светло-серый */
+  transform: translateY(-50%);
+}
