@@ -32,3 +32,4 @@ dist-ssr/
 # Cache directory
 .bolt/
 .vite/
+repomix-output.xml
