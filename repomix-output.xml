@@ -166,7 +166,7 @@ export default tseslint.config(
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Турнирная сетка</title>
+    <title>Мастер Турниров</title>
     <meta name="description" content="Приложение для организации турнирных сеток" />
   </head>
   <body>
@@ -850,7 +850,7 @@ const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors';
   
   const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 disabled:bg-blue-300',
+    primary: 'bg-emerald-600 text-white hover:bg-emerald-700 focus:ring-emerald-500 disabled:bg-emerald-300',
     secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400 disabled:bg-gray-100 disabled:text-gray-400',
     danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 disabled:bg-red-300',
     ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 focus:ring-gray-300 disabled:text-gray-300'
@@ -877,8 +877,8 @@ const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {isLoading && (
-        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-current\" xmlns="http://www.w3.org/2000/svg\" fill="none\" viewBox="0 0 24 24">
+          <circle className="opacity-25\" cx="12\" cy="12\" r="10\" stroke="currentColor\" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       )}
@@ -1029,15 +1029,13 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-sm text-gray-600">© 2025 ТурнирПро. Все права защищены.</p>
+            <p className="text-sm text-gray-600">© 2025 Мастер Турниров. Все права защищены.</p>
           </div>
           <div className="flex items-center space-x-4">
             <a href="#" className="text-gray-600 hover:text-blue-600 flex items-center">
               <Github className="h-5 w-5 mr-1" />
               <span className="text-sm">GitHub</span>
             </a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 text-sm">Документация API</a>
-            <a href="#" className="text-gray-600 hover:text-blue-600 text-sm">Помощь</a>
           </div>
         </div>
       </div>
@@ -1045,7 +1043,7 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default Footer
 </file>
 
 <file path="src/components/Input.tsx">
@@ -1251,15 +1249,15 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-3">
-            <Trophy className="h-8 w-8 text-blue-600" />
-            <span className="font-bold text-xl">ТурнирПро</span>
+            <Trophy className="h-8 w-8 text-emerald-600" />
+            <span className="font-bold text-xl">Мастер Турниров</span>
           </Link>
           
           <nav className="hidden md:flex space-x-8">
             <NavLink 
               to="/" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
               end
             >
@@ -1268,7 +1266,7 @@ const Navbar: React.FC = () => {
             <NavLink 
               to="/tournaments/new" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
             >
               Создать турнир
@@ -1276,7 +1274,7 @@ const Navbar: React.FC = () => {
             <NavLink 
               to="/about" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
             >
               О проекте
@@ -2817,19 +2815,19 @@ const AboutPage: React.FC = () => {
       
       <div className="card mb-8">
         <h2 className="text-xl font-semibold mb-4">Цели проекта</h2>
-        <p className="mb-4">
-          Наш проект "ТурнирПро" предназначен для упрощения организации и проведения турниров различных форматов. 
+        <p className="mb-4 text-slate-300">
+          Наш проект "Мастер Турниров" предназначен для упрощения организации и проведения турниров различных форматов. 
           От спортивных соревнований до киберспортивных турниров — наша платформа поможет вам:
         </p>
         
-        <ul className="list-disc list-inside space-y-2 mb-4 pl-4">
+        <ul className="list-disc list-inside space-y-2 mb-4 pl-4 text-slate-300">
           <li>Создавать турниры с различными типами сеток</li>
           <li>Отслеживать результаты матчей в реальном времени</li>
           <li>Автоматизировать процесс распределения участников</li>
           <li>Экспортировать данные для использования в других приложениях</li>
         </ul>
         
-        <p>
+        <p className="text-slate-300">
           Это open-source проект, и мы приветствуем вклад сообщества в его развитие.
         </p>
       </div>
@@ -2839,8 +2837,8 @@ const AboutPage: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <h3 className="font-medium text-gray-700 mb-2">Фронтенд:</h3>
-            <ul className="list-disc list-inside space-y-1 pl-4">
+            <h3 className="font-medium text-slate-200 mb-2">Фронтенд:</h3>
+            <ul className="list-disc list-inside space-y-1 pl-4 text-slate-300">
               <li>React + TypeScript</li>
               <li>React Router v6</li>
               <li>Tailwind CSS</li>
@@ -2849,8 +2847,8 @@ const AboutPage: React.FC = () => {
           </div>
           
           <div>
-            <h3 className="font-medium text-gray-700 mb-2">API и бэкенд:</h3>
-            <ul className="list-disc list-inside space-y-1 pl-4">
+            <h3 className="font-medium text-slate-200 mb-2">API и бэкенд:</h3>
+            <ul className="list-disc list-inside space-y-1 pl-4 text-slate-300">
               <li>Mock Service Worker (MSW)</li>
               <li>JSON Server</li>
               <li>RESTful API</li>
@@ -2860,8 +2858,8 @@ const AboutPage: React.FC = () => {
         </div>
         
         <div className="mt-6">
-          <h3 className="font-medium text-gray-700 mb-2">Инструменты разработки:</h3>
-          <ul className="list-disc list-inside space-y-1 pl-4">
+          <h3 className="font-medium text-slate-200 mb-2">Инструменты разработки:</h3>
+          <ul className="list-disc list-inside space-y-1 pl-4 text-slate-300">
             <li>Vite</li>
             <li>ESLint</li>
             <li>Prettier</li>
@@ -2872,54 +2870,20 @@ const AboutPage: React.FC = () => {
       </div>
       
       <div className="card">
-        <h2 className="text-xl font-semibold mb-4">Ресурсы и документация</h2>
+        <h2 className="text-xl font-semibold mb-4">Ресурсы</h2>
         
         <div className="space-y-4">
           <div className="flex items-start space-x-4">
-            <div className="bg-gray-100 p-2 rounded-full">
-              <Github className="h-6 w-6 text-gray-600" />
+            <div className="bg-slate-700 p-2 rounded-full">
+              <Github className="h-6 w-6 text-slate-300" />
             </div>
             <div>
-              <h3 className="font-medium text-gray-700">Репозиторий проекта</h3>
-              <p className="text-gray-600 text-sm mb-2">
+              <h3 className="font-medium text-slate-200">Репозиторий проекта</h3>
+              <p className="text-slate-400 text-sm mb-2">
                 Посетите наш GitHub репозиторий, чтобы посмотреть исходный код и внести свой вклад.
               </p>
               <Button variant="secondary" size="sm">
                 Перейти на GitHub
-              </Button>
-            </div>
-          </div>
-          
-          <div className="flex items-start space-x-4">
-            <div className="bg-gray-100 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-medium text-gray-700">Документация API</h3>
-              <p className="text-gray-600 text-sm mb-2">
-                Подробная документация по всем эндпоинтам API и примеры использования.
-              </p>
-              <Button variant="secondary" size="sm">
-                Документация API
-              </Button>
-            </div>
-          </div>
-          
-          <div className="flex items-start space-x-4">
-            <div className="bg-gray-100 p-2 rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <h3 className="font-medium text-gray-700">Руководство пользователя</h3>
-              <p className="text-gray-600 text-sm mb-2">
-                Инструкции по использованию платформы и лучшие практики организации турниров.
-              </p>
-              <Button variant="secondary" size="sm">
-                Руководство пользователя
               </Button>
             </div>
           </div>

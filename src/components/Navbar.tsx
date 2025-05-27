@@ -8,15 +8,15 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-3">
-            <Trophy className="h-8 w-8 text-blue-600" />
-            <span className="font-bold text-xl">ТурнирПро</span>
+            <Trophy className="h-8 w-8 text-emerald-600" />
+            <span className="font-bold text-xl">Мастер Турниров</span>
           </Link>
           
           <nav className="hidden md:flex space-x-8">
             <NavLink 
               to="/" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
               end
             >
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
             <NavLink 
               to="/tournaments/new" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
             >
               Создать турнир
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             <NavLink 
               to="/about" 
               className={({ isActive }) => 
-                `text-sm font-medium ${isActive ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'}`
+                `text-sm font-medium ${isActive ? 'text-emerald-600' : 'text-gray-700 hover:text-emerald-600'}`
               }
             >
               О проекте

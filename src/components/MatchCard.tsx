@@ -34,20 +34,19 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, roundIndex, onScoreUpdate 
     return 'Не начался';
   };
 
-  // Определяем цвет для статуса
+  // Цвет статуса: завершён — синий, все остальные — серый
   const getStatusColor = () => {
     const status = getMatchStatus();
-    if (status === 'Завершен') return 'text-green-600';
-    if (status === 'Не начался') return 'text-blue-600';
+    if (status === 'Завершен') return 'text-blue-600';
     return 'text-gray-500';
   };
 
   return (
-    <div 
+    <div
       className={`bracket-match ${isEditing ? 'bracket-match-active' : ''}`}
-      style={{ 
-        marginTop: roundIndex > 0 ? `${Math.pow(2, roundIndex) * 16}px` : '0', 
-        marginBottom: roundIndex > 0 ? `${Math.pow(2, roundIndex) * 16}px` : '8px' 
+      style={{
+        marginTop: roundIndex > 0 ? `${Math.pow(2, roundIndex) * 16}px` : '0',
+        marginBottom: roundIndex > 0 ? `${Math.pow(2, roundIndex) * 16}px` : '8px'
       }}
     >
       <div className="flex justify-between items-center mb-3">
@@ -55,64 +54,54 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, roundIndex, onScoreUpdate 
           {getMatchStatus()}
         </span>
         {!isEditing && (
-          <button 
+          <button
             onClick={() => setIsEditing(true)}
             className="text-gray-400 hover:text-blue-600"
-            title="Редактировать счет"
+            title="Редактировать счёт"
           >
             <Edit2 size={14} />
           </button>
         )}
       </div>
-      
+
       <div className="space-y-3">
         <div className="flex justify-between items-center">
           <span className="font-medium">{match.participant1 || 'TBD'}</span>
           {!isEditing ? (
             <span className="font-bold">{match.score1 ?? '-'}</span>
           ) : (
-            <input 
-              type="number" 
+            <input
+              type="number"
               min="0"
-              value={score1} 
+              value={score1}
               onChange={(e) => setScore1(e.target.value)}
               className="w-12 text-center border border-gray-300 rounded"
             />
           )}
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="font-medium">{match.participant2 || 'TBD'}</span>
           {!isEditing ? (
             <span className="font-bold">{match.score2 ?? '-'}</span>
           ) : (
-            <input 
+            <input
               type="number"
               min="0"
-              value={score2} 
+              value={score2}
               onChange={(e) => setScore2(e.target.value)}
               className="w-12 text-center border border-gray-300 rounded"
             />
           )}
         </div>
       </div>
-      
+
       {isEditing && (
         <div className="flex justify-end space-x-2 mt-3">
-          <Button 
-            size="sm" 
-            variant="ghost"
-            onClick={handleCancelEdit}
-            leftIcon={<X size={14} />}
-          >
+          <Button size="sm" variant="ghost" onClick={handleCancelEdit} leftIcon={<X size={14} />}>
             Отмена
           </Button>
-          <Button 
-            size="sm" 
-            variant="primary"
-            onClick={handleSaveScore}
-            leftIcon={<Check size={14} />}
-          >
+          <Button size="sm" variant="primary" onClick={handleSaveScore} leftIcon={<Check size={14} />}>
             Сохранить
           </Button>
         </div>

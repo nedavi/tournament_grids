@@ -1,3 +1,4 @@
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -113,21 +114,4 @@
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 300ms, transform 300ms;
-}
-
-
-.match-wrapper {
-  position: relative;
-  /* Отступ между карточками; при необходимости подкорректируйте */
-  margin-bottom: 2rem;
-}
-
-.match-wrapper .connector {
-  position: absolute;
-  top: 50%;
-  right: -24px;      /* сдвиг вправо на длину линии */
-  width: 24px;       /* длина горизонтальной линии */
-  height: 1px;       /* толщина */
-  background-color: #e5e7eb; /* светло-серый */
-  transform: translateY(-50%);
 }
