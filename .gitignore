@@ -29,5 +29,6 @@ dist-ssr/
 *.sln
 *.sw?
 
-# Bolt cache directory
+# Cache directory
 .bolt/
+.vite
