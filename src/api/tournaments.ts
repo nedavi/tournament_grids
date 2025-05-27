@@ -1,137 +1,93 @@
 import { Tournament, TournamentFormData } from '../types/tournament';
 
-// Base API URL with explicit path
-const API_URL = import.meta.env.DEV ? '/api/tournaments' : '/api/tournaments';
+// Base API URL
+const API_URL = import.meta.env.DEV
+  ? '/api/tournaments'
+  : '/api/tournaments';
 
-// Get all tournaments
+/** Получить все турниры */
 export const getAllTournaments = async (): Promise<Tournament[]> => {
-  try {
-    const response = await fetch(API_URL);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      throw new Error('Response is not JSON');
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error fetching tournaments:', error);
-    throw error;
-  }
+  const res = await fetch(API_URL);
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+  return res.json();
 };
 
-// Get tournament by ID
+/** Получить турнир по ID */
 export const getTournamentById = async (id: string): Promise<Tournament> => {
-  try {
-    const response = await fetch(`${API_URL}/${id}`);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Error fetching tournament with ID ${id}:`, error);
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/${id}`);
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+  return res.json();
 };
 
-// Create new tournament
-export const createTournament = async (tournamentData: TournamentFormData): Promise<Tournament> => {
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tournamentData),
-    });
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`HTTP error! Status: ${response.status}, Details: ${errorText}`);
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Error creating tournament:', error);
-    throw error;
-  }
+/** Создать новый турнир */
+export const createTournament = async (
+  data: TournamentFormData
+): Promise<Tournament> => {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+  return res.json();
 };
 
-// Update tournament
-export const updateTournament = async (id: string, tournamentData: Partial<Tournament>): Promise<Tournament> => {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(tournamentData),
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Error updating tournament with ID ${id}:`, error);
-    throw error;
-  }
+/**
+ * Обновить произвольные поля турнира, включая статус, participants, rounds и т.д.
+ * Принимает Partial<Tournament>.
+ */
+export const updateTournament = async (
+  id: string,
+  data: Partial<Tournament>
+): Promise<Tournament> => {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+  return res.json();
 };
 
-// Update match score
+/** Обновить счёт конкретного матча в турнире */
 export const updateMatchScore = async (
-  tournamentId: string, 
-  matchId: string, 
-  score1: number, 
+  tournamentId: string,
+  matchId: string,
+  score1: number,
   score2: number
 ): Promise<void> => {
-  try {
-    // First get current tournament data
-    const tournament = await getTournamentById(tournamentId);
-    
-    // Update score for the specified match
-    const updatedRounds = tournament.rounds.map(round => {
-      const updatedMatches = round.matches.map(match => {
-        if (match.id === matchId) {
-          return { ...match, score1, score2 };
-        }
-        return match;
-      });
-      
-      return { ...round, matches: updatedMatches };
-    });
-    
-    // Send updated tournament
-    await updateTournament(tournamentId, { rounds: updatedRounds });
-  } catch (error) {
-    console.error(`Error updating match score for tournament ${tournamentId}, match ${matchId}:`, error);
-    throw error;
-  }
+  const tournament = await getTournamentById(tournamentId);
+  const updatedRounds = tournament.rounds.map((r) => ({
+    ...r,
+    matches: r.matches.map((m) =>
+      m.id === matchId ? { ...m, score1, score2 } : m
+    ),
+  }));
+  await updateTournament(tournamentId, { rounds: updatedRounds });
 };
 
-// Delete tournament
+/**
+ * Автопереход победителя:
+ * Обновляет participant1 или participant2 в указанном матче.
+ */
+export const updateMatchParticipant = async (
+  tournamentId: string,
+  matchId: string,
+  side: 'participant1' | 'participant2',
+  name: string
+): Promise<void> => {
+  const tournament = await getTournamentById(tournamentId);
+  const updatedRounds = tournament.rounds.map((r) => ({
+    ...r,
+    matches: r.matches.map((m) =>
+      m.id === matchId ? { ...m, [side]: name } : m
+    ),
+  }));
+  await updateTournament(tournamentId, { rounds: updatedRounds });
+};
+
+/** Удалить турнир */
 export const deleteTournament = async (id: string): Promise<void> => {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE',
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-  } catch (error) {
-    console.error(`Error deleting tournament with ID ${id}:`, error);
-    throw error;
-  }
+  const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
 };

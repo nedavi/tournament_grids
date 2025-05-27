@@ -4,7 +4,6 @@ export interface Match {
   participant2: string | null;
   score1: number | null;
   score2: number | null;
-  winnerId?: string | null;
   nextMatchId?: string | null;
 }
 
@@ -30,10 +29,12 @@ export interface Tournament {
   updatedAt: string;
 }
 
+// **Обновили**: добавили participants в форму
 export interface TournamentFormData {
   name: string;
   bracketType: string;
   maxParticipants: number;
   startDate: string;
   rules?: string;
+  participants: string[];
 }
